@@ -21,14 +21,14 @@
 
 @font-face {
   font-family: 'nyt-karnakcondensed';
-  src: url('./public/NYTKarnakCondensed.ttf');
+  src: url('./NYTKarnakCondensed.ttf');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: Chomsky;
-  src: url('./public/Chomsky.otf');
+  src: url('./Chomsky.otf');
 }
 :root {
   --grey-primary: rgb(18, 18, 18);
@@ -46,7 +46,6 @@
   --text-color-primary-light: var(--grey-primary);
   --text-color-disabled-light: var(--grey-disabled);
 
-  color-scheme: light dark;
   color: var(--text-color-primary-light);
   background-color: var(--bg-color-light);
 
@@ -68,7 +67,7 @@ body {
   height: 100vh;
 }
 
-#root {
+#app-root {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -76,16 +75,3 @@ body {
   justify-content: start;
   width: 100%;
 }
-/* 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
