@@ -2,24 +2,29 @@ import { AnswerSet } from './game.types';
 
 export const INITIAL_SETS: AnswerSet[] = [
   {
-    category: 'WORDS BEFORE AN ADDRESSEE',
-    color: 'blue',
-    items: ['ATTENTION', 'DEAR', 'FOR', 'TO'],
-  },
-  {
-    category: 'MOVE QUICKLY',
+    category: 'JAN 31 BIRTHDAYS',
     color: 'yellow',
-    items: ['BOLT', 'DART', 'DASH', 'FLY'],
+    items: [
+      'JUSTIN TIMBERLAKE',
+      'MELISSA TEIXEIRA',
+      'MINNIE DRIVER',
+      'FRANZ SCHUBERT',
+    ],
   },
   {
-    category: 'FUN TIME',
+    category: 'M___T WORDS',
     color: 'green',
-    items: ['BALL', 'BLAST', 'KICK', 'THRILL'],
+    items: ['MAT', 'MUTT', 'MOAT', 'MOOT'],
   },
   {
-    category: 'NAME ___',
+    category: "MELISSA's LOVELY QUALITIES",
+    color: 'blue',
+    items: ['BEAUTIFUL', 'BRILLIANT', 'GREAT LAUGH', 'CARING'],
+  },
+  {
+    category: "REVIEWS FOR TONIGHT'S RESTAURANT",
     color: 'purple',
-    items: ['BRAND', 'DROP', 'GAME', 'NAMES'],
+    items: ['AMBITIOUS', 'MICHELIN GRADE', 'AUDACIOUS', 'UNEXPECTED'],
   },
 ];
 

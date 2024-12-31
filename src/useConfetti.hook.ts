@@ -1,8 +1,8 @@
 import confetti from 'canvas-confetti';
 import { useCallback } from 'react';
 
-const count = 200;
-const defaults = {
+const count = 500;
+const defaults: confetti.Options = {
   origin: { y: 0.7 },
 };
 
