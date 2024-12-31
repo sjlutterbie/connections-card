@@ -7,8 +7,13 @@ export function useMistakes() {
     [setMistakes],
   );
 
+  const resetMistakes = useCallback(() => {
+    setMistakes(4);
+  }, []);
+
   return {
     mistakesRemaining,
     recordMistake,
+    resetMistakes,
   };
 }

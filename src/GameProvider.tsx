@@ -1,10 +1,11 @@
-import { ReactNode, useCallback, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo } from 'react';
 import { gameContext } from './game.context';
 import { useMistakes } from './useMistakes.hook';
 import { useAnswerSets } from './useAnswerSets.hook';
 import { useItems } from './useItems.hook';
 import { useGuesses } from './useGuesses.hook';
 import { useSnackbar } from './snackbar.context';
+import { useConfetti } from './useConfetti.hook';
 
 type Props = {
   children: ReactNode;
@@ -14,8 +15,9 @@ export function GameProvider(props: Props) {
   const { children } = props;
 
   const { openSnackbar } = useSnackbar();
+  const { fireConfetti } = useConfetti();
 
-  const { mistakesRemaining, recordMistake } = useMistakes();
+  const { mistakesRemaining, recordMistake, resetMistakes } = useMistakes();
   const { isAlreadyGuessed } = useGuesses();
   const { foundSets, isCorrectGuess, isOffByOne, openSets } = useAnswerSets();
   const {
@@ -59,9 +61,6 @@ export function GameProvider(props: Props) {
         deselectAllItems();
         return;
       }
-      if (isVictorious) {
-        return;
-      }
 
       recordMistake();
 
@@ -71,14 +70,29 @@ export function GameProvider(props: Props) {
       }
     },
     [
+      deselectAllItems,
       isAlreadyGuessed,
       isCorrectGuess,
       isOffByOne,
-      isVictorious,
       openSnackbar,
       recordMistake,
+      removeItems,
     ],
   );
+
+  // VICTORY!
+  useEffect(() => {
+    if (isVictorious) {
+      fireConfetti();
+    }
+  }, [fireConfetti, isVictorious]);
+
+  // "Loss" condition (reset mistakes, no losing here!)
+  useEffect(() => {
+    if (!mistakesRemaining) {
+      resetMistakes();
+    }
+  }, [mistakesRemaining, resetMistakes]);
 
   const value = useMemo(
     () => ({

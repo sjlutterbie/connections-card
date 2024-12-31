@@ -26,8 +26,8 @@ function App() {
         <img src={chartSvg} />
         <img src={questionSvg} />
       </div>
-      <div id="section-instructions">Create four groups of four!</div>
       <div id="section-game">
+        <div id="section-instructions">Create four groups of four!</div>
         {foundSets.length ? (
           <div id="section-found-sets">
             {foundSets.map((set) => {

@@ -2,6 +2,7 @@ import { useGameContext } from './game.context';
 
 export function GameControls() {
   const {
+    availableItems,
     shuffleItems,
     canDeselectItems,
     canSubmit,
@@ -12,7 +13,10 @@ export function GameControls() {
 
   return (
     <>
-      <button className="game-control" onClick={shuffleItems}>
+      <button
+        className="game-control"
+        onClick={shuffleItems}
+        disabled={!availableItems.length}>
         Shuffle
       </button>
       <button
