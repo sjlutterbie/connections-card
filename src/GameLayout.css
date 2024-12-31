@@ -19,7 +19,15 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: 24px;
+  margin: 24px 20px 0px 20px;
+}
+
+@media (min-width: 640px) {
+  #section-found-sets {
+    margin-top: 24px;
+    margin: auto;
+    width: 624px;
+  }
 }
 
 .answer-set {
@@ -95,6 +103,7 @@
     font-size: 20px;
   }
   .tile.long-text {
+    aspect-ratio: 1.875;
     font-size: 20px;
   }
 }

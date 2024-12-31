@@ -1,5 +1,10 @@
 @font-face {
   font-family: Franklin;
+  font-weight: 300;
+  src: url('https://a1.nyt.com/fonts/family/franklin/franklin-normal-300.ttf');
+}
+@font-face {
+  font-family: Franklin;
   font-weight: 500;
   src: url('https://a1.nyt.com/fonts/family/franklin/franklin-normal-500.ttf');
 }
@@ -14,6 +19,17 @@
   src: url('https://a1.nyt.com/fonts/family/franklin/franklin-normal-700.ttf');
 }
 
+@font-face {
+  font-family: 'nyt-karnakcondensed';
+  src: url('./public/NYTKarnakCondensed.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Chomsky;
+  src: url('./public/Chomsky.otf');
+}
 :root {
   --grey-primary: rgb(18, 18, 18);
   --grey-secondary: rgb(90, 89, 78);
