@@ -1,10 +1,10 @@
 import './GameLayout.css';
 import { Tile } from './Tile';
 
-const SET_1 = ['ABE', 'ACT', 'ADD', 'AFT'];
-const SET_2 = ['BAG', 'BED', 'BIN', 'BOT'];
-const SET_3 = ['CAV', 'CEL', 'CON', 'CUB'];
-const SET_4 = ['DAD', 'DEF', 'DOG', 'DUB'];
+const SET_1 = ['TAPS', 'UNICORN', 'IRONS', 'BACON'];
+const SET_2 = ['PRESSES', 'PHOENIX', 'CAR', 'BUGLER'];
+const SET_3 = ['BRIDGES', 'AFRICA', 'TOAST', 'WASHINGTON'];
+const SET_4 = ['GRITS', 'HITS', 'HASH', 'CLICKS'];
 
 const TILES = [...SET_1, ...SET_2, ...SET_3, ...SET_4];
 

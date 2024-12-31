@@ -1,3 +1,11 @@
+#root {
+  --tile-bg-color: rgb(239, 239, 230);
+  --tile-color: rgb(18, 18, 18);
+
+  --tile-bg-color-selected: rgb(90, 89, 78);
+  --tile-color-selected: rgb(248, 248, 248);
+}
+
 #section-instructions {
   font-weight: 500;
   font-size: 18px;
@@ -16,13 +24,36 @@
 }
 
 .tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Franklin;
+  font-weight: 700;
+  font-size: 16px;
   flex: 1 0 21%;
-  border: 1px solid green;
+  background-color: var(--tile-bg-color);
+  border-radius: 6px;
+  color: var(--tile-color);
   aspect-ratio: 1;
+  border: 0px;
+  cursor: pointer;
+}
+
+.tile.selected {
+  background-color: var(--tile-bg-color-selected);
+  color: var(--tile-color-selected);
+}
+
+.tile.long-text {
+  font-size: 11.5px;
 }
 
 @media (min-width: 640px) {
   .tile {
     aspect-ratio: 1.875;
+    font-size: 20px;
+  }
+  .tile.long-text {
+    font-size: 20px;
   }
 }
