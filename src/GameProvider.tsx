@@ -25,6 +25,7 @@ export function GameProvider(props: Props) {
     canSubmit,
     deselectAllItems,
     isItemSelected,
+    removeItems,
     selectedItems,
     shuffleItems,
     toggleItem,
@@ -54,6 +55,8 @@ export function GameProvider(props: Props) {
         return;
       }
       if (isCorrectGuess(guess)) {
+        removeItems(guess);
+        deselectAllItems();
         return;
       }
       if (isVictorious) {

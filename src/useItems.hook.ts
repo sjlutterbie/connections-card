@@ -43,6 +43,12 @@ export function useItems() {
     setAvailableItems(shuffledItems);
   }, [availableItems]);
 
+  const removeItems = useCallback((itemsToRemove: string[]) => {
+    setAvailableItems((prev) =>
+      prev.filter((item) => !itemsToRemove.includes(item)),
+    );
+  }, []);
+
   return {
     availableItems,
     canDeselectItems,
@@ -50,6 +56,7 @@ export function useItems() {
     canSubmit,
     deselectAllItems,
     isItemSelected,
+    removeItems,
     selectedItems,
     shuffleItems,
     toggleItem,
