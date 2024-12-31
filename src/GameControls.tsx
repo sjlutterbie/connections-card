@@ -6,7 +6,7 @@ export function GameControls() {
     canDeselectItems,
     canSubmit,
     deselectAllItems,
-    handleSubmission,
+    handleGuess,
     selectedItems,
   } = useGameContext();
 
@@ -24,7 +24,7 @@ export function GameControls() {
       <button
         className="game-control submit"
         disabled={!canSubmit}
-        onClick={() => handleSubmission(selectedItems)}>
+        onClick={() => handleGuess(selectedItems)}>
         Submit
       </button>
     </>

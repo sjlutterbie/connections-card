@@ -8,12 +8,12 @@ export type GameContext = {
   canSubmit: boolean;
   deselectAllItems: () => void;
   foundSets: AnswerSet[];
-  handleSubmission: (submission: string[]) => void;
+  handleGuess: (submission: string[]) => void;
+  handleToggleItem: (targetItem: string) => void;
   isItemSelected: (targetItem: string) => boolean;
   mistakesRemaining: number;
   selectedItems: string[];
   shuffleItems: () => void;
-  toggleItem: (targetItem: string) => void;
 };
 
 export const gameContext = createContext<GameContext | undefined>(undefined);

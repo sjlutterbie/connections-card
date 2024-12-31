@@ -9,7 +9,7 @@ type Props = {
 export function Tile(props: Props) {
   const { label } = props;
 
-  const { canSelectItem, toggleItem, isItemSelected } = useGameContext();
+  const { canSelectItem, handleToggleItem, isItemSelected } = useGameContext();
 
   const isSelected = isItemSelected(label);
 
@@ -24,7 +24,7 @@ export function Tile(props: Props) {
     if (!isSelected && !canSelectItem) {
       return;
     }
-    toggleItem(label);
+    handleToggleItem(label);
   };
 
   return (

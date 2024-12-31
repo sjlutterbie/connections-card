@@ -31,3 +31,7 @@ export function shuffleArray<T>(inputArray: T[]): T[] {
 
   return shuffledItems;
 }
+
+export function normalizeStringArray(input: string[]) {
+  return input.sort().join('').toLowerCase();
+}

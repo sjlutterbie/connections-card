@@ -1,108 +1,80 @@
-import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { gameContext } from './game.context';
-import { AnswerSet, SubmissionOutcome } from './game.types';
-import { checkSubmission, shuffleArray } from './utils';
+import { useMistakes } from './useMistakes.hook';
+import { useAnswerSets } from './useAnswerSets.hook';
+import { useItems } from './useItems.hook';
+import { useGuesses } from './useGuesses.hook';
+import { useSnackbar } from './snackbar.context';
 
-const INITIAL_SETS: AnswerSet[] = [
-  {
-    category: 'WORDS BEFORE AN ADDRESSEE',
-    color: 'blue',
-    items: ['ATTENTION', 'DEAR', 'FOR', 'TO'],
-  },
-  {
-    category: 'MOVE QUICKLY',
-    color: 'yellow',
-    items: ['BOLT', 'DART', 'DASH', 'FLY'],
-  },
-  {
-    category: 'FUN TIME',
-    color: 'green',
-    items: ['BALL', 'BLAST', 'KICK', 'THRILL'],
-  },
-  {
-    category: 'NAME ___',
-    color: 'purple',
-    items: ['BRAND', 'DROP', 'GAME', 'NAMES'],
-  },
-];
-
-type Props = PropsWithChildren<unknown>;
+type Props = {
+  children: ReactNode;
+};
 
 export function GameProvider(props: Props) {
   const { children } = props;
 
-  const [mistakesRemaining, setMistakes] = useState(4);
-  const recordMistake = useCallback(
-    () => setMistakes((prev) => prev - 1),
-    [setMistakes],
-  );
+  const { openSnackbar } = useSnackbar();
 
-  const [openSets, setOpenSets] = useState<AnswerSet[]>(INITIAL_SETS);
-  // const [foundSets, setFoundSets] = useState<AnswerSet[]>([]);
-  const [foundSets, setFoundSets] = useState<AnswerSet[]>(INITIAL_SETS);
+  const { mistakesRemaining, recordMistake } = useMistakes();
+  const { isAlreadyGuessed } = useGuesses();
+  const { foundSets, isCorrectGuess, isOffByOne, openSets } = useAnswerSets();
+  const {
+    availableItems,
+    canDeselectItems,
+    canSelectItem,
+    canSubmit,
+    deselectAllItems,
+    isItemSelected,
+    selectedItems,
+    shuffleItems,
+    toggleItem,
+  } = useItems();
 
-  const [availableItems, setAvailableItems] = useState<string[]>(
-    shuffleArray(openSets.flatMap((set) => set.items)),
-  );
+  const isVictorious = useMemo(() => {
+    if (openSets.length !== 0) {
+      return false;
+    }
+    if (foundSets.length !== 4) {
+      throw new Error('Set mistmach');
+    }
+    return true;
+  }, [foundSets.length, openSets.length]);
 
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
-
-  const { canDeselectItems, canSelectItem, canSubmit } = useMemo(
-    () => ({
-      canDeselectItems: !!selectedItems.length,
-      canSelectItem: selectedItems.length < 4,
-      canSubmit: selectedItems.length === 4,
-    }),
-    [selectedItems],
-  );
-
-  const deselectAllItems = useCallback(
-    () => setSelectedItems([]),
-    [setSelectedItems],
-  );
-
-  const isItemSelected = useCallback(
-    (targetItem: string) => selectedItems.includes(targetItem),
-    [selectedItems],
-  );
-
-  const toggleItem = useCallback(
-    (targetItem: string) => {
-      if (selectedItems.includes(targetItem)) {
-        setSelectedItems(selectedItems.filter((item) => item !== targetItem));
-        return;
-      }
-      setSelectedItems([...selectedItems, targetItem]);
+  const handleToggleItem = useCallback(
+    (item: string) => {
+      toggleItem(item);
     },
-    [selectedItems],
+    [toggleItem],
   );
 
-  const shuffleItems = useCallback(() => {
-    const shuffledItems = shuffleArray(availableItems);
-    setAvailableItems(shuffledItems);
-  }, [availableItems]);
-
-  const handleSubmission = useCallback(
-    (submission: string[]) => {
-      let outcome = SubmissionOutcome.Incorrect;
-      for (const setToCheck of openSets) {
-        outcome = checkSubmission(submission, setToCheck);
-        if (outcome === SubmissionOutcome.Correct) {
-          setFoundSets((prev) => [...prev, setToCheck]);
-          setOpenSets((prev) =>
-            prev.filter((set) => set.category !== setToCheck.category),
-          );
-          break;
-        }
-      }
-      setSelectedItems([]);
-      if (outcome === SubmissionOutcome.Correct) {
+  const handleGuess = useCallback(
+    (guess: string[]) => {
+      if (isAlreadyGuessed(guess)) {
+        openSnackbar('Already guessed!');
         return;
       }
+      if (isCorrectGuess(guess)) {
+        return;
+      }
+      if (isVictorious) {
+        return;
+      }
+
       recordMistake();
-      // TODO:
+
+      if (isOffByOne(guess)) {
+        openSnackbar('One away...');
+        return;
+      }
     },
-    [openSets, recordMistake, setSelectedItems],
+    [
+      isAlreadyGuessed,
+      isCorrectGuess,
+      isOffByOne,
+      isVictorious,
+      openSnackbar,
+      recordMistake,
+    ],
   );
 
   const value = useMemo(
@@ -113,12 +85,12 @@ export function GameProvider(props: Props) {
       canSubmit,
       deselectAllItems,
       foundSets,
-      handleSubmission,
+      handleGuess,
+      handleToggleItem,
       isItemSelected,
       mistakesRemaining,
       selectedItems,
       shuffleItems,
-      toggleItem,
     }),
     [
       availableItems,
@@ -127,12 +99,12 @@ export function GameProvider(props: Props) {
       canSubmit,
       deselectAllItems,
       foundSets,
-      handleSubmission,
+      handleGuess,
+      handleToggleItem,
       isItemSelected,
       mistakesRemaining,
       selectedItems,
       shuffleItems,
-      toggleItem,
     ],
   );
 
