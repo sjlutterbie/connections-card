@@ -33,6 +33,32 @@ export function GameProvider(props: Props) {
   const [openSets, setOpenSets] = useState<AnswerSet[]>(INITIAL_SETS);
   // const [solvedSets, setSolvedSets] = useState<AnswerSet[]>([]);
 
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+  const canDeselectItems = !!selectedItems.length;
+  const canSelectItem = selectedItems.length < 4;
+
+  const deselectAllItems = useCallback(
+    () => setSelectedItems([]),
+    [setSelectedItems],
+  );
+
+  const isItemSelected = useCallback(
+    (targetItem: string) => selectedItems.includes(targetItem),
+    [selectedItems],
+  );
+
+  const toggleItem = useCallback(
+    (targetItem: string) => {
+      if (selectedItems.includes(targetItem)) {
+        setSelectedItems(selectedItems.filter((item) => item !== targetItem));
+        return;
+      }
+      setSelectedItems([...selectedItems, targetItem]);
+    },
+    [selectedItems],
+  );
+
   const [availableItems, setAvailableItems] = useState<string[]>(
     shuffleArray(openSets.flatMap((set) => set.items)),
   );
@@ -45,9 +71,22 @@ export function GameProvider(props: Props) {
   const value = useMemo(
     () => ({
       availableItems,
+      canDeselectItems,
+      canSelectItem,
+      deselectAllItems,
+      isItemSelected,
       shuffleItems,
+      toggleItem,
     }),
-    [availableItems, shuffleItems],
+    [
+      availableItems,
+      canDeselectItems,
+      canSelectItem,
+      deselectAllItems,
+      isItemSelected,
+      shuffleItems,
+      toggleItem,
+    ],
   );
 
   return <gameContext.Provider value={value}>{children}</gameContext.Provider>;

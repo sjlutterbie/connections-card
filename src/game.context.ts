@@ -2,7 +2,12 @@ import { createContext, useContext } from 'react';
 
 export type GameContext = {
   availableItems: string[];
+  canSelectItem: boolean;
+  canDeselectItems: boolean;
+  deselectAllItems: () => void;
+  isItemSelected: (targetItem: string) => boolean;
   shuffleItems: () => void;
+  toggleItem: (targetItem: string) => void;
 };
 
 export const gameContext = createContext<GameContext | undefined>(undefined);

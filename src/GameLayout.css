@@ -4,6 +4,8 @@
 
   --tile-bg-color-selected: rgb(90, 89, 78);
   --tile-color-selected: rgb(248, 248, 248);
+
+  --disabled-color: rgb(151, 151, 151);
 }
 
 #section-instructions {
@@ -85,4 +87,10 @@
   font-weight: 600;
   border-radius: 32px;
   cursor: pointer;
+}
+
+.game-control:disabled {
+  border-color: var(--disabled-color);
+  color: var(--disabled-color);
+  cursor: default;
 }

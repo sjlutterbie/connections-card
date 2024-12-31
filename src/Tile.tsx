@@ -1,4 +1,5 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useGameContext } from './game.context';
 
 type Props = {
   // isSelected?: boolean;
@@ -8,7 +9,9 @@ type Props = {
 export function Tile(props: Props) {
   const { label } = props;
 
-  const [isSelected, setIsSelected] = useState(false);
+  const { canSelectItem, toggleItem, isItemSelected } = useGameContext();
+
+  const isSelected = isItemSelected(label);
 
   const classes = useMemo(() => {
     const longText = label.length >= 10;
@@ -17,7 +20,12 @@ export function Tile(props: Props) {
       .join(' ');
   }, [isSelected, label]);
 
-  const handleClick = () => setIsSelected((prev) => !prev);
+  const handleClick = () => {
+    if (!isSelected && !canSelectItem) {
+      return;
+    }
+    toggleItem(label);
+  };
 
   return (
     <button className={classes} onClick={handleClick}>
