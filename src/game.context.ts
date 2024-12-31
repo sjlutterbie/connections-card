@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import { AnswerSet } from './game.types';
 
 export type GameContext = {
   availableItems: string[];
@@ -6,7 +7,11 @@ export type GameContext = {
   canDeselectItems: boolean;
   canSubmit: boolean;
   deselectAllItems: () => void;
+  foundSets: AnswerSet[];
+  handleSubmission: (submission: string[]) => void;
   isItemSelected: (targetItem: string) => boolean;
+  mistakesRemaining: number;
+  selectedItems: string[];
   shuffleItems: () => void;
   toggleItem: (targetItem: string) => void;
 };

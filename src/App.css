@@ -14,7 +14,6 @@
 }
 
 #section-game {
-  border: 1px solid blue;
   flex-grow: 1;
   margin: auto;
 }

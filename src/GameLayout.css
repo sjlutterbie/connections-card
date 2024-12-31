@@ -1,11 +1,11 @@
 #root {
-  --tile-bg-color: rgb(239, 239, 230);
-  --tile-color: rgb(18, 18, 18);
+  --tile-bg-color: var(--grey-light);
+  --tile-color: var(--grey-primary);
 
-  --tile-bg-color-selected: rgb(90, 89, 78);
-  --tile-color-selected: rgb(248, 248, 248);
+  --tile-bg-color-selected: var(--grey-secondary);
+  --tile-color-selected: var(--grey-lightest);
 
-  --disabled-color: rgb(151, 151, 151);
+  --disabled-color: var(--grey-disabled);
 }
 
 #section-instructions {
@@ -13,6 +13,44 @@
   font-size: 18px;
   text-align: center;
   width: 100%;
+}
+
+#section-found-sets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answer-set {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 10px 0px;
+  border-radius: 6px;
+}
+
+.answer-set.yellow {
+  background-color: var(--color-yellow);
+}
+
+.answer-set.green {
+  background-color: var(--color-green);
+}
+.answer-set.blue {
+  background-color: var(--color-blue);
+}
+.answer-set.purple {
+  background-color: var(--color-purple);
+}
+
+.answer-set-category {
+  font-weight: 700;
+}
+
+.answer-set-item {
+  font-weight: 500;
 }
 
 #section-tiles {
@@ -66,6 +104,22 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  color: var(--grey-secondary);
+  font-weight: 500;
+}
+
+#mistakes-container {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-left: 10px;
+}
+
+.mistake {
+  height: 16px;
+  width: 16px;
+  border-radius: 100%;
+  background-color: var(--grey-secondary);
 }
 
 #section-controls {
@@ -78,7 +132,7 @@
 }
 
 .game-control {
-  padding: 15px;
+  padding: 15px 18px;
   background-color: var(--bg-color-light);
   border: 1px solid var(--text-color-primary-light);
   color: var(--text-color-primary-light);

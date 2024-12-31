@@ -15,10 +15,20 @@
 }
 
 :root {
-  --bg-color-light: rgb(255, 255, 255);
-  --text-color-primary-light: rgb(18, 18, 18);
-  --text-color-secondary-light: rgb(90, 89, 78);
-  --text-color-disabled-light: rgb(151, 151, 151);
+  --grey-primary: rgb(18, 18, 18);
+  --grey-secondary: rgb(90, 89, 78);
+  --grey-light: rgb(239, 239, 230);
+  --grey-lightest: rgb(248, 248, 248);
+  --grey-disabled: rgb(151, 151, 151);
+
+  --color-yellow: rgb(249, 223, 109);
+  --color-green: rgb(160, 195, 90);
+  --color-blue: rgb(176, 196, 239);
+  --color-purple: rgb(186, 129, 197);
+
+  --bg-color-light: white;
+  --text-color-primary-light: var(--grey-primary);
+  --text-color-disabled-light: var(--grey-disabled);
 
   color-scheme: light dark;
   color: var(--text-color-primary-light);
