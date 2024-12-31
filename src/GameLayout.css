@@ -1,0 +1,28 @@
+#section-instructions {
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+}
+
+#section-tiles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+  margin: 24px 0px;
+  max-width: 640px;
+}
+
+.tile {
+  flex: 1 0 21%;
+  border: 1px solid green;
+  aspect-ratio: 1;
+}
+
+@media (min-width: 640px) {
+  .tile {
+    aspect-ratio: 1.875;
+  }
+}
