@@ -37,6 +37,7 @@ export function GameProvider(props: Props) {
 
   const canDeselectItems = !!selectedItems.length;
   const canSelectItem = selectedItems.length < 4;
+  const canSubmit = selectedItems.length === 4;
 
   const deselectAllItems = useCallback(
     () => setSelectedItems([]),
@@ -73,6 +74,7 @@ export function GameProvider(props: Props) {
       availableItems,
       canDeselectItems,
       canSelectItem,
+      canSubmit,
       deselectAllItems,
       isItemSelected,
       shuffleItems,
@@ -82,6 +84,7 @@ export function GameProvider(props: Props) {
       availableItems,
       canDeselectItems,
       canSelectItem,
+      canSubmit,
       deselectAllItems,
       isItemSelected,
       shuffleItems,

@@ -4,6 +4,7 @@ export type GameContext = {
   availableItems: string[];
   canSelectItem: boolean;
   canDeselectItems: boolean;
+  canSubmit: boolean;
   deselectAllItems: () => void;
   isItemSelected: (targetItem: string) => boolean;
   shuffleItems: () => void;

@@ -89,8 +89,16 @@
   cursor: pointer;
 }
 
-.game-control:disabled {
+.game-control:disabled,
+.game-control.submit:disabled {
+  background-color: var(--bg-color-light);
   border-color: var(--disabled-color);
   color: var(--disabled-color);
   cursor: default;
+}
+
+.game-control.submit {
+  background-color: var(--text-color-primary-light);
+  border: 1px solid var(--bg-color-light);
+  color: var(--bg-color-light);
 }
